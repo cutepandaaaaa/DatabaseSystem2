@@ -1,0 +1,16 @@
+WITH user_info AS (
+    SELECT * FROM USER
+),
+voucher_filter AS (
+    SELECT uv.user_id, v.*
+    FROM USER_VOUCHER uv
+    JOIN VOUCHER v ON uv.voucherID = v.voucherID
+    WHERE uv.user_id = 1
+      AND uv.is_used = FALSE
+      AND v.validFrom <= NOW()
+      AND v.validTo >= NOW()
+      AND v.currentLimit < v.usageLimit
+)
+SELECT u.*, v.*
+FROM user_info u
+LEFT JOIN voucher_filter v ON u.userID = v.user_id;
