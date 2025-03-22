@@ -1,2 +1,1 @@
-# DatabaseSystem2
-group project
+this is a repository for storing sql query scripts.
