@@ -43,7 +43,7 @@ CREATE TABLE VOUCHER (
     validFrom DATETIME,
     validTo DATETIME,
     usageLimit INT,
-    currentLimit INT
+    currentLimit VARCHAR(20)
 );
 
 -- User-Voucher relation table
