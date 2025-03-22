@@ -105,9 +105,9 @@ CREATE TABLE PAYMENT (
 -- Order table
 CREATE TABLE USER_ORDER (
     orderID INT PRIMARY KEY,
-    userID INT,
-    addressID INT,
-    paymentID INT,
+    userID INT NOT NULL,
+    addressID INT NOT NULL,
+    paymentID INT NOT NULL,
     orderDate DATETIME DEFAULT CURRENT_TIMESTAMP,
     status VARCHAR(50),
     grossAmount DOUBLE,
