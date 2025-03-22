@@ -1,0 +1,180 @@
+-- Disable foreign key checks for dropping tables
+SET FOREIGN_KEY_CHECKS = 0;
+
+DROP TABLE IF EXISTS USER_VOUCHER;
+DROP TABLE IF EXISTS VOUCHER;
+DROP TABLE IF EXISTS ORDER_ITEM;
+DROP TABLE IF EXISTS PRODUCT_ORDER;
+DROP TABLE IF EXISTS CART_ITEM;
+DROP TABLE IF EXISTS CART;
+DROP TABLE IF EXISTS PAYMENT;
+DROP TABLE IF EXISTS REVIEW;
+DROP TABLE IF EXISTS SEARCH_LOG;
+DROP TABLE IF EXISTS PRODUCT;
+DROP TABLE IF EXISTS RECIPE_PRODUCT;
+DROP TABLE IF EXISTS RECIPE;
+DROP TABLE IF EXISTS USER;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- User table
+CREATE TABLE USER (
+    userID INT PRIMARY KEY,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    phone VARCHAR(20),
+    createdDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    lastLogin DATETIME,
+    street VARCHAR(255),
+    block VARCHAR(255),
+    unit VARCHAR(255),
+    postalCode INT
+);
+
+-- Voucher table
+CREATE TABLE VOUCHER (
+    voucherID INT PRIMARY KEY,
+    code VARCHAR(50) UNIQUE NOT NULL,
+    type VARCHAR(50) NOT NULL,
+    minOrderValue DOUBLE,
+    validFrom DATETIME,
+    validTo DATETIME,
+    usageLimit INT,
+    currentLimit INT
+);
+
+-- User-Voucher relation table
+CREATE TABLE USER_VOUCHER (
+    userVoucherID INT PRIMARY KEY,
+    user_id INT,
+    voucherID INT,
+    is_used BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (user_id) REFERENCES USER(userID),
+    FOREIGN KEY (voucherID) REFERENCES VOUCHER(voucherID)
+);
+
+-- Product table
+CREATE TABLE PRODUCT (
+    productID INT PRIMARY KEY,
+    categoryID INT,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    price DOUBLE NOT NULL,
+    stockQuantity INT NOT NULL,
+    image VARCHAR(255),
+    active BOOLEAN DEFAULT TRUE,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Shopping cart table
+CREATE TABLE CART (
+    cartID INT PRIMARY KEY,
+    userID INT,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (userID) REFERENCES USER(userID)
+);
+
+-- Cart items
+CREATE TABLE CART_ITEM (
+    cartItemID INT PRIMARY KEY,
+    cartID INT,
+    productID INT,
+    quantity INT NOT NULL,
+    unitPrice DOUBLE NOT NULL,
+    FOREIGN KEY (cartID) REFERENCES CART(cartID),
+    FOREIGN KEY (productID) REFERENCES PRODUCT(productID)
+);
+
+-- Payment table
+CREATE TABLE PAYMENT (
+    paymentID INT PRIMARY KEY,
+    userID INT,
+    paymentMethod VARCHAR(50),
+    transactionID VARCHAR(255),
+    amount DOUBLE,
+    status VARCHAR(50),
+    paymentDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (userID) REFERENCES USER(userID)
+);
+
+-- Order table
+CREATE TABLE PRODUCT_ORDER (
+    orderID INT PRIMARY KEY,
+    userID INT,
+    addressID INT,
+    paymentID INT,
+    orderDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(50),
+    grossAmount DOUBLE,
+    shipping DOUBLE,
+    GST DOUBLE,
+    `Field` DOUBLE,
+    FOREIGN KEY (userID) REFERENCES USER(userID),
+    FOREIGN KEY (paymentID) REFERENCES PAYMENT(paymentID)
+);
+
+-- Order items
+CREATE TABLE ORDER_ITEM (
+    orderItemID INT PRIMARY KEY,
+    orderID INT,
+    productID INT,
+    quantity INT NOT NULL,
+    unit_price DOUBLE NOT NULL,
+    FOREIGN KEY (orderID) REFERENCES PRODUCT_ORDER(orderID),
+    FOREIGN KEY (productID) REFERENCES PRODUCT(productID)
+);
+
+-- Review table
+CREATE TABLE REVIEW (
+    reviewID INT PRIMARY KEY,
+    userID INT,
+    productID INT,
+    orderID INT,
+    rating INT CHECK (rating BETWEEN 1 AND 5),
+    comment TEXT,
+    createAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    image VARCHAR(255),
+    FOREIGN KEY (userID) REFERENCES USER(userID),
+    FOREIGN KEY (productID) REFERENCES PRODUCT(productID),
+    FOREIGN KEY (orderID) REFERENCES PRODUCT_ORDER(orderID)
+);
+
+-- Search log table
+CREATE TABLE SEARCH_LOG (
+    searchID INT PRIMARY KEY AUTO_INCREMENT,
+    userID INT,
+    search VARCHAR(255),
+    searchDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    filtersApplied VARCHAR(255),
+    FOREIGN KEY (userID) REFERENCES USER(userID)
+);
+
+-- Recipe table
+CREATE TABLE RECIPE (
+    recipeID INT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    instructions TEXT,
+    image VARCHAR(255),
+    prepTime INT,
+    cookTime INT,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    author VARCHAR(255),
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Recipe-product relation
+CREATE TABLE RECIPE_PRODUCT (
+    recipeProductID INT PRIMARY KEY,
+    recipeID INT,
+    productID INT,
+    quantity INT NOT NULL,
+    unit VARCHAR(50),
+    FOREIGN KEY (recipeID) REFERENCES RECIPE(recipeID),
+    FOREIGN KEY (productID) REFERENCES PRODUCT(productID)
+);
