@@ -1,0 +1,34 @@
+SELECT 
+    u.userID,
+    CONCAT(u.firstName, ' ', u.lastName) AS userFullName,
+    o.userOrderID,
+    o.orderDate,
+    o.status AS orderStatus,
+    o.grossAmount,
+    o.shippingAmount,
+    o.GST,
+    p.name AS productName,
+    oi.quantity,
+    oi.unitPrice,
+    (oi.quantity * oi.unitPrice) AS totalPrice,
+    c.name AS categoryName,
+    pay.paymentMethod,
+    pay.amount AS paymentAmount,
+    pay.status AS paymentStatus,
+    pay.paymentDate
+FROM 
+    UserOrder o
+INNER JOIN 
+    User u ON o.userID = u.userID
+INNER JOIN 
+    OrderItem oi ON o.userOrderID = oi.orderID
+INNER JOIN 
+    Product p ON oi.productID = p.productID
+INNER JOIN 
+    Category c ON p.categoryID = c.categoryID
+LEFT JOIN 
+    Payment pay ON o.userID = pay.userID
+WHERE 
+    o.userID = 1 -- Replace with the specific userID or use a parameterized query in your application
+ORDER BY 
+    o.orderDate DESC;  -- Order by latest orders first
