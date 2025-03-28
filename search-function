@@ -1,0 +1,6 @@
+SELECT p.name AS productName,
+	c.name AS categoryName
+FROM Product p
+INNER JOIN Category c ON p.categoryID = c.categoryID
+WHERE p.name LIKE '%var%' 
+OR c.name LIKE '%var%';
