@@ -1,0 +1,17 @@
+--update quantity 
+INSERT INTO CartItem (cartID, productID, quantity, unitPrice)
+SELECT 2, 3, 1, price
+FROM Product
+WHERE productID = 3
+  AND NOT EXISTS (
+      SELECT 1 FROM CartItem WHERE cartID = 2 AND productID = 3
+  );
+
+--insert data
+INSERT INTO CartItem (cartID, productID, quantity, unitPrice)
+SELECT 2, 3, 1, price
+FROM Product
+WHERE productID = 3
+  AND NOT EXISTS (
+      SELECT 1 FROM CartItem WHERE cartID = 2 AND productID = 3
+  );
