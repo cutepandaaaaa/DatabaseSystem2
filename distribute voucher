@@ -1,0 +1,10 @@
+-- 插入用户券
+INSERT INTO UserVoucher (userID, voucherID, isUsed)
+SELECT 3, voucherID, 0
+FROM Voucher
+WHERE code = 'FREESHIP' AND currentLimit < usageLimit;
+
+-- 更新券的 currentLimit
+UPDATE Voucher
+SET currentLimit = currentLimit + 1
+WHERE code = 'FREESHIP' AND currentLimit < usageLimit;
