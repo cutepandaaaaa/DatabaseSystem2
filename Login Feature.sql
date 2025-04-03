@@ -1,3 +1,7 @@
+SELECT userID, passwordHash 
+FROM User 
+WHERE userName = 'john_tan';
+
 -- Insert into SessionToken table for the new login session
 INSERT INTO SessionToken (userID, token, expiryTime, issuedAt)
 VALUES 
