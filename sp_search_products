@@ -1,0 +1,15 @@
+DELIMITER //
+
+CREATE PROCEDURE sp_search_products(IN keyword VARCHAR(255))
+BEGIN
+    SELECT 
+        p.name AS productName,
+        c.name AS categoryName
+    FROM product p
+    INNER JOIN category c ON p.categoryId = c.categoryId
+    WHERE p.name LIKE CONCAT('%', keyword, '%') 
+       OR c.name LIKE CONCAT('%', keyword, '%');
+END;
+//
+
+DELIMITER ;
