@@ -1,0 +1,16 @@
+WITH userInfo AS (
+    SELECT * FROM user
+),
+voucherFilter AS (
+    SELECT uv.userId, v.*
+    FROM userOrderVoucher uv
+    JOIN voucher v ON uv.voucherId = v.voucherId
+    WHERE uv.userId = 1
+      AND uv.isUsed = FALSE
+      AND v.validFrom <= NOW()
+      AND v.validTo >= NOW()
+      AND v.usedCount < v.usageLimit
+)
+SELECT u.*, v.*
+FROM userInfo u
+LEFT JOIN voucherFilter v ON u.userId = v.userId;
