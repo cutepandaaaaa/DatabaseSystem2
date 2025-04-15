@@ -1,7 +1,12 @@
-UPDATE loginHistory
-SET logoutTime = NOW()
-WHERE userId = 1 AND logoutTime IS NULL;
+-- Check credentials
+SELECT userId, passwordHash 
+FROM user 
+WHERE username = 'john_tan';
 
-UPDATE sessionToken
-SET expiryTime = NOW()
-WHERE userId = 1 AND expiryTime > NOW();
+-- Insert Session
+INSERT INTO sessionToken (userId, token, expiryTime, issuedAt)
+VALUES (1, 'new_session_token_12345', DATE_ADD(NOW(), INTERVAL 1 HOUR), NOW());
+
+-- Insert Login
+INSERT INTO loginHistory (userId, loginTime, logoutTime, ipAddress)
+VALUES (1, NOW(), NULL, '192.168.1.1');
