@@ -1,0 +1,41 @@
+DELIMITER //
+
+CREATE PROCEDURE sp_sales_report()
+BEGIN
+    -- Total stats
+    SELECT 
+        COUNT(userOrderId) AS totalOrders,
+        SUM(grossAmount) AS totalRevenue,
+        ROUND(AVG(grossAmount), 2) AS averageOrderValue
+    FROM userOrder
+    WHERE orderDate >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+      AND status = 'Completed';
+
+    -- Top Products
+    SELECT 
+        p.productId, p.name, 
+        SUM(oi.quantity) AS totalQuantitySold, 
+        SUM(oi.quantity * oi.unitPrice) AS totalRevenueGenerated
+    FROM orderItem oi
+    JOIN product p ON oi.productId = p.productId
+    JOIN userOrder uo ON oi.orderId = uo.userOrderId
+    WHERE uo.orderDate >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+      AND uo.status = 'Completed'
+    GROUP BY p.productId, p.name
+    ORDER BY totalQuantitySold DESC
+    LIMIT 5;
+
+    -- Payment Methods
+    SELECT 
+        pay.paymentMethod, 
+        COUNT(uo.userOrderId) AS totalOrders, 
+        SUM(uo.grossAmount) AS totalRevenue
+    FROM userOrder uo
+    JOIN payment pay ON uo.paymentId = pay.paymentId
+    WHERE uo.orderDate >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+      AND uo.status = 'Completed'
+    GROUP BY pay.paymentMethod;
+END;
+//
+
+DELIMITER ;
