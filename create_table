@@ -2,7 +2,7 @@
 CREATE DATABASE IF NOT EXISTS EcommerceDB;
 USE EcommerceDB;
 
--- User table@@@
+-- User table
 CREATE TABLE User (
     userID INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(255) NOT NULL UNIQUE,
@@ -19,7 +19,7 @@ CREATE TABLE User (
     password VARCHAR(255) NOT NULL
 );
 
--- Category table@@@
+-- Category table
 CREATE TABLE Category (
     categoryID INT PRIMARY KEY AUTO_INCREMENT,
     productID VARCHAR(255) NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE Category (
     FOREIGN KEY (productID) REFERENCES Product(productID)
 );
 
--- Product table@@@
+-- Product table
 CREATE TABLE Product (
     productID INT PRIMARY KEY AUTO_INCREMENT,
     categoryID INT NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE Product (
     FOREIGN KEY (categoryID) REFERENCES Category(categoryID)
 );
 
--- Payment table@@@
+-- Payment table
 CREATE TABLE Payment (
     paymentID INT PRIMARY KEY AUTO_INCREMENT,
     userID INT,
@@ -54,7 +54,7 @@ CREATE TABLE Payment (
     FOREIGN KEY (userID) REFERENCES User(userID)
 );
 
--- User Order table@@@
+-- User Order table
 CREATE TABLE UserOrder (
     userOrderID INT PRIMARY KEY AUTO_INCREMENT,
     userID INT NOT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE UserOrder (
     FOREIGN KEY (paymentID) REFERENCES Payment(paymentID)
 );
 
--- Order Item table@@@
+-- Order Item table
 CREATE TABLE OrderItem (
     orderItemID INT PRIMARY KEY AUTO_INCREMENT,
     orderID INT NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE OrderItem (
     FOREIGN KEY (productID) REFERENCES Product(productID)
 );
 
--- Cart table@@@
+-- Cart table
 CREATE TABLE Carts (
     cartID INT PRIMARY KEY AUTO_INCREMENT,
     userID INT,
