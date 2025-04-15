@@ -1,0 +1,34 @@
+DELIMITER //
+
+CREATE PROCEDURE sp_user_purchase_history(IN uid INT)
+BEGIN
+    SELECT 
+        u.userId,
+        CONCAT(u.firstName, ' ', u.lastName) AS userFullName,
+        o.userOrderId,
+        o.orderDate,
+        o.status AS orderStatus,
+        o.grossAmount,
+        o.shippingAmount,
+        o.gst,
+        p.name AS productName,
+        oi.quantity,
+        oi.unitPrice,
+        (oi.quantity * oi.unitPrice) AS totalPrice,
+        c.name AS categoryName,
+        pay.paymentMethod,
+        pay.amount AS paymentAmount,
+        pay.status AS paymentStatus,
+        pay.paymentDate
+    FROM userOrder o
+    INNER JOIN user u ON o.userId = u.userId
+    INNER JOIN orderItem oi ON o.userOrderId = oi.orderId
+    INNER JOIN product p ON oi.productId = p.productId
+    INNER JOIN category c ON p.categoryId = c.categoryId
+    LEFT JOIN payment pay ON o.paymentId = pay.paymentId
+    WHERE o.userId = uid
+    ORDER BY o.orderDate DESC;
+END;
+//
+
+DELIMITER ;
