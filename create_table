@@ -139,3 +139,16 @@ CREATE TABLE Review (
     FOREIGN KEY (productID) REFERENCES Product(productID),
     FOREIGN KEY (orderID) REFERENCES UserOrder(userOrderID)
 );
+
+--LoginHistory Table
+CREATE TABLE LoginHistory (
+    loginHistoryID INT AUTO_INCREMENT,
+    userID INT,
+    loginTime DATETIME NOT NULL,
+    LogoutTime DATETIME,
+    ipAddress VARCHAR(45) NOT NULL,
+    PRIMARY KEY (loginHistoryID),
+    FOREIGN KEY (userID) REFERENCES User(userID),
+    CHECK (logoutTime IS NULL OR logoutTime > loginTime)
+);
+
