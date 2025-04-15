@@ -1,0 +1,39 @@
+DELIMITER //
+
+CREATE PROCEDURE sp_process_payment(
+    IN uid INT,
+    IN method VARCHAR(255),
+    IN txnId VARCHAR(255),
+    IN amt DECIMAL(10,2)
+)
+BEGIN
+    DECLARE orderId INT;
+
+    START TRANSACTION;
+
+    INSERT INTO payment (userId, paymentMethod, transactionId, amount, status, paymentDate)
+    VALUES (uid, method, txnId, amt, 'Pending', NOW());
+
+    SET @lastPaymentId = LAST_INSERT_ID();
+
+    -- Assume one pending order per user
+    SELECT userOrderId INTO orderId
+    FROM userOrder
+    WHERE userId = uid AND status = 'Pending'
+    LIMIT 1;
+
+    IF orderId IS NOT NULL THEN
+        UPDATE userOrder 
+        SET paymentId = @lastPaymentId, status = 'Processing'
+        WHERE userOrderId = orderId;
+
+        COMMIT;
+        SELECT 'Payment Processed' AS message;
+    ELSE
+        ROLLBACK;
+        SELECT 'No Pending Order Found' AS message;
+    END IF;
+END;
+//
+
+DELIMITER ;
