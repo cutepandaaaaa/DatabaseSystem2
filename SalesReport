@@ -1,0 +1,45 @@
+SELECT ​
+
+   COUNT(userOrderID) AS totalOrders, SUM(grossAmount) AS totalRevenue, ROUND(AVG(grossAmount), 2) AS averageOrderValue FROM UserOrder ​
+
+WHERE orderDate >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH) ​
+
+AND status = 'Completed’; ​
+
+​
+
+SELECT ​
+
+   P.productID, P.name, SUM(OI.quantity) AS totalQuantitySold, SUM(OI.quantity * OI.unitPrice) AS totalRevenueGenerated ​
+
+FROM OrderItem OI ​
+
+JOIN Product P ON OI.productID = P.productID ​
+
+JOIN UserOrder UO ON OI.orderID = UO.userOrderID​
+
+WHERE UO.orderDate >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH) ​
+
+AND UO.status = 'Completed’ ​
+
+GROUP BY P.productID, P.name ​
+
+ORDER BY totalQuantitySold DESC ​
+
+LIMIT 5; ​
+
+​
+
+SELECT ​
+
+   P.paymentMethod, COUNT(UO.userOrderID) AS totalOrders, SUM(UO.grossAmount) AS totalRevenue ​
+
+FROM UserOrder UO ​
+
+JOIN Payment P ON UO.paymentID = P.paymentID ​
+
+WHERE UO.orderDate >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)​
+
+AND UO.status = 'Completed’ ​
+
+GROUP BY P.paymentMethod; ​
