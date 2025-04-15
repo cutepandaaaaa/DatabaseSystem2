@@ -4,3 +4,15 @@ FROM Product p
 INNER JOIN Category c ON p.categoryID = c.categoryID
 WHERE p.name LIKE '%var%' 
 OR c.name LIKE '%var%';
+
+
+
+now, help me review the following features to make sure they align with the table format revised above. along with optimization and making sure the query runs without any issues. 
+
+--Search Function
+SELECT p.name AS productName,
+	c.name AS categoryName
+FROM Product p
+INNER JOIN Category c ON p.categoryID = c.categoryID
+WHERE p.name LIKE '%var%' 
+OR c.name LIKE '%var%';
