@@ -1,0 +1,22 @@
+DELIMITER //
+
+CREATE PROCEDURE sp_distribute_voucher(IN uid INT, IN vcode VARCHAR(255))
+BEGIN
+    DECLARE vid INT;
+
+    SELECT voucherId INTO vid
+    FROM voucher
+    WHERE code = vcode AND usedCount < usageLimit;
+
+    IF vid IS NOT NULL THEN
+        INSERT INTO userOrderVoucher (userId, voucherId, userOrderId, isUsed)
+        VALUES (uid, vid, NULL, FALSE);
+
+        UPDATE voucher
+        SET usedCount = usedCount + 1
+        WHERE voucherId = vid;
+    END IF;
+END;
+//
+
+DELIMITER ;
