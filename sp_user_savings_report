@@ -1,0 +1,19 @@
+DELIMITER //
+
+CREATE PROCEDURE sp_user_savings_report()
+BEGIN
+    SELECT 
+        u.userId,
+        u.email,
+        SUM((uo.grossAmount * v.discountPercent) / 100) AS totalSavings
+    FROM userOrder uo
+    JOIN userOrderVoucher uov ON uo.userOrderId = uov.userOrderId
+    JOIN voucher v ON uov.voucherId = v.voucherId
+    JOIN user u ON uo.userId = u.userId
+    WHERE uo.orderDate >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+      AND uo.status = 'Completed'
+    GROUP BY u.userId, u.email;
+END;
+//
+
+DELIMITER ;
