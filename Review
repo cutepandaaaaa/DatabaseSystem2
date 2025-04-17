@@ -1,5 +1,5 @@
 INSERT INTO review (userId, productId, orderId, rating, comment, createdAt, image) 
-VALUES (1, 5, 20, 4, 'Great product! Fast delivery.', NOW(), 'review1.jpg');
+VALUES (1, 5, 2, 4, 'Great product! Fast delivery.', NOW(), 'review1.jpg');
 
 DELIMITER //
 
