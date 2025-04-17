@@ -32,7 +32,7 @@ INSERT INTO Product (productID, categoryID, name, description, price, stockQuant
 VALUES
 (1, 101, 'Laptop', 'High-end gaming laptop', 1500.00, 20, 'laptop.jpg', TRUE, NOW(), NOW()),
 (2, 102, 'Phone', 'Latest smartphone', 999.99, 50, 'phone.jpg', TRUE, NOW(), NOW()),
-(3, 103, 'Headphones', 'Noise cancelling', 199.99, 100, 'headphones.jpg', TRUE, NOW(), NOW());
+(3, 103, 'Headphones', 'Noise cancelling', 199.99, 100, 'headphones.jpg', TRUE, NOW(), NOW()),
 (1, 101, 'Laptop', 'High-end gaming laptop', 1500.00, 20, 'laptop.jpg', TRUE, NOW(), NOW()),
 (2, 102, 'Phone', 'Latest smartphone', 999.99, 50, 'phone.jpg', TRUE, NOW(), NOW()),
 (3, 103, 'Headphones', 'Noise cancelling', 199.99, 100, 'headphones.jpg', TRUE, NOW(), NOW()),
@@ -132,7 +132,7 @@ VALUES
 (97, 101, 'Monitor 14', '4K UHD 27-inch monitor', 350.00, 181, 'monitor.jpg', TRUE, NOW(), NOW()),
 (98, 102, 'Wireless Charger 37', 'Fast wireless charging pad', 29.99, 65, 'wireless_charger.jpg', TRUE, NOW(), NOW()),
 (99, 101, 'Power Bank 16', '10,000mAh portable charger', 39.99, 137, 'power_bank.jpg', TRUE, NOW(), NOW()),
-(100, 101, 'Tablet 17', '10-inch Android tablet', 299.00, 62, 'tablet.jpg', TRUE, NOW(), NOW()),
+(100, 101, 'Tablet 17', '10-inch Android tablet', 299.00, 62, 'tablet.jpg', TRUE, NOW(), NOW());
 
 -- ✅ Insert test data for Address
 INSERT INTO Address (addressID, userID, street, block, unit, postalCode)
