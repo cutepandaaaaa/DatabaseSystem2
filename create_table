@@ -10,7 +10,7 @@ CREATE TABLE user (
     firstName VARCHAR(255) NOT NULL,
     lastName VARCHAR(255) NOT NULL,
     phone VARCHAR(20) NOT NULL UNIQUE,
-    createdAt DATETIME NOT NULL,
+    createdDate DATETIME NOT NULL,
     lastLogin DATETIME,
     street VARCHAR(255) NOT NULL,
     block VARCHAR(50),
