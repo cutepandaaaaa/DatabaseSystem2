@@ -1,4 +1,3 @@
--- Insert into SessionToken table
 INSERT INTO SessionToken (userID, token, expiryTime, issuedAt)
 VALUES
 (1, 'session_token_1', DATE_ADD(NOW(), INTERVAL 1 HOUR), NOW()),
@@ -102,7 +101,6 @@ VALUES
 (99, 'session_token_99', DATE_ADD(NOW(), INTERVAL 1 HOUR), NOW()),
 (100, 'session_token_100', DATE_ADD(NOW(), INTERVAL 1 HOUR), NOW());
 
--- Insert into LoginHistory table for the new login event
 INSERT INTO LoginHistory (userID, loginTime, logoutTime, ipAddress)
 VALUES
 (1, NOW(), NULL, '203.116.1.1'),
