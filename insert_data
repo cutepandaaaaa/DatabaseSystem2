@@ -1,5 +1,5 @@
 -- ✅ Insert test data for User
-INSERT INTO User (userID, username, email, password, firstName, lastName, phone, createdDate, lastLogin, street, block, unit, postalCode)
+INSERT INTO User (userID, username, email, passwordHash, firstName, lastName, phone, createdDate, lastLogin, street, block, unit, postalCode)
 VALUES
 (1, 'alice', 'alice@example.com', 'pass1', 'Alice', 'Wonder', '1234567890', NOW(), NOW(), '123 Main St', 'A', '01-01', '123456'),
 (2, 'bob', 'bob@example.com', 'pass2', 'Bob', 'Builder', '2345678901', NOW(), NOW(), '456 Elm St', 'B', '02-02', '234567'),
