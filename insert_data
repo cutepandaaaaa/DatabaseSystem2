@@ -13,7 +13,7 @@ VALUES
 (3, 'BIGSALE20', 20.00, 150.00, NOW(), DATE_ADD(NOW(), INTERVAL 60 DAY), 500, 120);
 
 -- ✅ Insert test data for UserVoucher
-INSERT INTO UserVoucher (userVoucherID, userID, voucherID, isUsed)
+INSERT INTO userOrderVoucher (userOrderVoucherId, userID, voucherID, isUsed)
 VALUES
 (1, 1, 1, FALSE),
 (2, 1, 2, FALSE),
@@ -30,9 +30,6 @@ VALUES
 -- ✅ Insert test data for Product
 INSERT INTO Product (productID, categoryID, name, description, price, stockQuantity, image, active, createdAt, updatedAt)
 VALUES
-(1, 101, 'Laptop', 'High-end gaming laptop', 1500.00, 20, 'laptop.jpg', TRUE, NOW(), NOW()),
-(2, 102, 'Phone', 'Latest smartphone', 999.99, 50, 'phone.jpg', TRUE, NOW(), NOW()),
-(3, 103, 'Headphones', 'Noise cancelling', 199.99, 100, 'headphones.jpg', TRUE, NOW(), NOW()),
 (1, 101, 'Laptop', 'High-end gaming laptop', 1500.00, 20, 'laptop.jpg', TRUE, NOW(), NOW()),
 (2, 102, 'Phone', 'Latest smartphone', 999.99, 50, 'phone.jpg', TRUE, NOW(), NOW()),
 (3, 103, 'Headphones', 'Noise cancelling', 199.99, 100, 'headphones.jpg', TRUE, NOW(), NOW()),
@@ -134,15 +131,9 @@ VALUES
 (99, 101, 'Power Bank 16', '10,000mAh portable charger', 39.99, 137, 'power_bank.jpg', TRUE, NOW(), NOW()),
 (100, 101, 'Tablet 17', '10-inch Android tablet', 299.00, 62, 'tablet.jpg', TRUE, NOW(), NOW());
 
--- ✅ Insert test data for Address
-INSERT INTO Address (addressID, userID, street, block, unit, postalCode)
-VALUES
-(101, 1, '123 Main St', 'A', '01-01', '123456'),
-(102, 2, '456 Elm St', 'B', '02-02', '234567'),
-(103, 3, '789 Oak St', 'C', '03-03', '345678');
 
 -- ✅ Insert test data for Carts
-INSERT INTO Carts (cartID, userID, createdAt, updatedAt)
+INSERT INTO Cart (cartID, userID, createdAt, updatedAt)
 VALUES
 (1, 1, NOW(), NOW()),
 (2, 2, NOW(), NOW());
@@ -161,10 +152,10 @@ VALUES
 (2, 2, 'PayPal', 'TXN002', 199.99, 'Pending', NOW());
 
 -- ✅ Insert test data for UserOrder
-INSERT INTO UserOrder (userOrderID, userID, addressID, paymentID, orderDate, status, grossAmount, shippingAmount, GST)
+INSERT INTO UserOrder (userOrderID, userID, paymentID, orderDate, status, grossAmount, shippingAmount, GST)
 VALUES
-(1, 1, 101, 1, NOW(), 'Processing', 3000.00, 50.00, 150.00),
-(2, 2, 102, 2, NOW(), 'Shipped', 199.99, 10.00, 10.00);
+(1, 1, 1, NOW(), 'Processing', 3000.00, 50.00, 150.00),
+(2, 2, 2, NOW(), 'Shipped', 199.99, 10.00, 10.00);
 
 -- ✅ Insert test data for OrderItem
 INSERT INTO OrderItem (orderItemID, orderID, productID, quantity, unitPrice)
@@ -174,7 +165,7 @@ VALUES
 (3, 2, 3, 1, 199.99);
 
 -- ✅ Insert test data for Review
-INSERT INTO Review (reviewID, userID, productID, orderID, rating, comment, createAt, image)
+INSERT INTO Review (reviewID, userID, productID, orderID, rating, comment, createdAt, image)
 VALUES
 (1, 1, 1, 1, 5, 'Great laptop!', NOW(), 'review1.jpg'),
 (2, 2, 3, 2, 4, 'Nice sound', NOW(), 'review2.jpg');
