@@ -1,7 +1,0 @@
-UPDATE loginHistory
-SET logoutTime = NOW()
-WHERE userId = 1 AND logoutTime IS NULL;
-
-UPDATE sessionToken
-SET expiryTime = NOW()
-WHERE userId = 1 AND expiryTime > NOW();
