@@ -106,6 +106,7 @@ CREATE TABLE voucher (
     validFrom DATETIME NOT NULL,
     validTo DATETIME NOT NULL,
     usageLimit INT NOT NULL,
+    currentLimit INT NOT NULL,
     usedCount INT NOT NULL DEFAULT 0
 );
 
