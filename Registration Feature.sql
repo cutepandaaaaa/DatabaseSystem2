@@ -1,10 +1,10 @@
 INSERT INTO User (username, email, firstName, lastName, phone, createdDate, block, street,  unit, postalCode, passwordHash)
 VALUES 
-    ('john_tan', 'john.tan@gmail.com', 'John', 'Tan', '88996473', '2025-01-01 10:00:00', '12','Jurong Ave 1', '01-101', '12345', 'hashed_password_1'),
-    ('jane_lee', 'jane.lee@gmail.com', 'Jane', 'Lee', '88110011', '2024-12-15 14:30:00', '456', 'Jurong Ave 5', '02-202', '67890', 'hashed_password_2'),
-    ('mike_lee', 'mike.lee@gmail.com', 'Mike', 'Lee', '99110011', '2025-02-10 11:20:00', '789', 'Clementi Ave 3', '03-303', '11223', 'hashed_password_3'),
-    ('lisa_sim', 'lisa.sim@gmail.com', 'Lisa', 'Sim', '90112345', '2025-03-01 12:45:00', '321' , 'Joo Koon Ave 1', '04-404', '44556', 'hashed_password_4'),
-    ('david_ng', 'david.ng@gmail.com', 'David', 'Ng', '93129870', '2024-11-21 09:10:00', NULL , 'Seletar Road', '05-505', '77889', 'hashed_password_5'),
+	('john_tan', 'john.tan@gmail.com', 'John', 'Tan', '88996473', '2025-01-01 10:00:00', '12','Jurong Ave 1', '01-101', '12345', 'hashed_password_1'),
+	('jane_lee', 'jane.lee@gmail.com', 'Jane', 'Lee', '88110011', '2024-12-15 14:30:00', '456', 'Jurong Ave 5', '02-202', '67890', 'hashed_password_2'),
+	('mike_lee', 'mike.lee@gmail.com', 'Mike', 'Lee', '99110011', '2025-02-10 11:20:00', '789', 'Clementi Ave 3', '03-303', '11223', 'hashed_password_3'),
+	('lisa_sim', 'lisa.sim@gmail.com', 'Lisa', 'Sim', '90112345', '2025-03-01 12:45:00', '321' , 'Joo Koon Ave 1', '04-404', '44556', 'hashed_password_4'),
+	('david_ng', 'david.ng@gmail.com', 'David', 'Ng', '93129870', '2024-11-21 09:10:00', NULL , 'Seletar Road', '05-505', '77889', 'hashed_password_5'),
 	('chris_ng6', 'chris.ng6@gmail.com', 'Chris', 'Ng', '97888342', '2024-11-03 08:23:04', '397', 'Jurong Ave 5', '22-597', '699678', 'hashed_password_6'),
 	('emily_sim7', 'emily.sim7@gmail.com', 'Emily', 'Sim', '86468642', '2025-01-29 14:05:24', '23', 'Bukit Timah Rd', '17-196', '221572', 'hashed_password_7'),
 	('lisa_lim8', 'lisa.lim8@gmail.com', 'Lisa', 'Lim', '97377121', '2024-12-13 23:10:57', NULL, 'Serangoon North Ave 1', '21-287', '238215', 'hashed_password_8'),
