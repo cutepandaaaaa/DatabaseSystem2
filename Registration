@@ -1,4 +1,4 @@
-INSERT INTO user (username, email, firstName, lastName, phone, createdAt, block, street, unit, postalCode, passwordHash)
+INSERT INTO user (username, email, firstName, lastName, phone, createdDate, block, street, unit, postalCode, passwordHash)
 VALUES 
 ('john_tan', 'john.tan@gmail.com', 'John', 'Tan', '88996473', '2025-01-01 10:00:00', '12', 'Jurong Ave 1', '01-101', '12345', 'hashed_password_1'),
 ('jane_lee', 'jane.lee@gmail.com', 'Jane', 'Lee', '88110011', '2024-12-15 14:30:00', '456', 'Jurong Ave 5', '02-202', '67890', 'hashed_password_2'),
